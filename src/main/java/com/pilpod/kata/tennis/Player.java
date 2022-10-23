@@ -25,19 +25,15 @@ public class Player {
     }
 
     public void winsPoint() {
-        if (this.points == 0) {
-            this.points = 15;
-            return;
-        }
 
-        if (this.points == 15) {
-            this.points = 30;
-            return;
-        }
+        int[] pointsList = {0,15,30,40};
 
-        if (this.points == 30) {
-            this.points = 40;
-            return;
+        for (int i = 0; i < pointsList.length; i++) {
+            if (this.points == pointsList[i]) {
+                i++;
+                this.points = pointsList[i];
+                break;
+            }
         }
     }
 
