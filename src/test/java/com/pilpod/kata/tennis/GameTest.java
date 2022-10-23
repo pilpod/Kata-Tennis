@@ -33,8 +33,7 @@ public class GameTest {
     @Test
     public void test_score_is_0_0_player_one_make_point_15_0() {
         Game game = new Game(playerOne, playerTwo);
-        game.setScore("0:0");
-        playerOne.setPoints(15);
+        playerOne.winsPoint();
         String score = game.score();
         assertEquals("15:0", score);
     }
@@ -42,9 +41,8 @@ public class GameTest {
     @Test
     public void test_score_is_15_0_player_two_make_point_15_15() {
         Game game = new Game(playerOne, playerTwo);
-        game.setScore("15:0");
         playerOne.setPoints(15);
-        playerTwo.setPoints(15);
+        playerTwo.winsPoint();
         String score = game.score();
         assertEquals("15:15", score);
     }
@@ -52,11 +50,21 @@ public class GameTest {
     @Test
     public void test_score_is_15_15_receiver_wins_point_score_15_30() {
         Game game = new Game(playerOne, playerTwo);
-        game.setScore("15:15");
         playerOne.setPoints(15);
-        playerTwo.setPoints(30);
+        playerTwo.setPoints(15);
+        playerTwo.winsPoint();
         String score = game.score();
         assertEquals("15:30", score);
+    }
+
+    @Test
+    public void test_score_is_30_30_the_server_wins_point_40_30() {
+        Game game = new Game(playerOne, playerTwo);
+        playerOne.setPoints(30);
+        playerTwo.setPoints(30);
+        playerOne.winsPoint();
+        String score = game.score();
+        assertEquals("40:30", score);
     }
 
 }
