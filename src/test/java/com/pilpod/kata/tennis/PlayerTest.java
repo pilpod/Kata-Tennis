@@ -8,10 +8,12 @@ import org.junit.jupiter.api.Test;
 public class PlayerTest {
 
     Player player;
+    Player opponent;
 
     @BeforeEach
     public void setUp() {
         this.player = new Player();
+        this.opponent = new Player();
     }
 
     @Test
@@ -29,21 +31,21 @@ public class PlayerTest {
 
     @Test
     public void test_player_has_0_points_and_wins_next_point_now_has_15_points() {
-        player.winsPoint();
+        player.winsPoint(opponent);
         assertEquals(15, player.getPoints());
     }
     
     @Test
     public void test_player_has_15_points_and_wins_next_point_now_has_30_points() {
         player.setPoints(15);
-        player.winsPoint();
+        player.winsPoint(opponent);
         assertEquals(30, player.getPoints());
     }
 
     @Test
     public void test_player_has_30_points_and_wins_next_point_now_has_40_points() {
         player.setPoints(30);
-        player.winsPoint();
+        player.winsPoint(opponent);
         assertEquals(40, player.getPoints());
     }
 }

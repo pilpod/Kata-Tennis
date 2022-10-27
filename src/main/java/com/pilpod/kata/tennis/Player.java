@@ -29,11 +29,20 @@ public class Player {
         return advantage;
     }
 
-    public void winsPoint() {
+    public void setAdvantage(String advantage) {
+        this.advantage = advantage;
+    }
+
+    public void winsPoint(Player opponent) {
 
         int[] pointsList = {0,15,30,40};
 
         for (int i = 0; i < pointsList.length; i++) {
+
+            if (opponent.advantage == "A") {
+                opponent.loseAdvantage();
+                break;
+            }
 
             if (this.points == 40) {
                 this.advantage = "A";
@@ -46,6 +55,10 @@ public class Player {
                 break;
             }
         }
+    }
+
+    public void loseAdvantage() {
+        this.advantage = null;
     }
 
 }

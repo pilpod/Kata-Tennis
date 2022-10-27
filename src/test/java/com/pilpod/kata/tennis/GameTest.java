@@ -33,7 +33,7 @@ public class GameTest {
     @Test
     public void test_score_is_0_0_player_one_make_point_15_0() {
         Game game = new Game(playerOne, playerTwo);
-        playerOne.winsPoint();
+        playerOne.winsPoint(playerTwo);
         String score = game.score();
         assertEquals("15:0", score);
     }
@@ -42,7 +42,7 @@ public class GameTest {
     public void test_score_is_15_0_player_two_make_point_15_15() {
         Game game = new Game(playerOne, playerTwo);
         playerOne.setPoints(15);
-        playerTwo.winsPoint();
+        playerTwo.winsPoint(playerOne);
         String score = game.score();
         assertEquals("15:15", score);
     }
@@ -52,7 +52,7 @@ public class GameTest {
         Game game = new Game(playerOne, playerTwo);
         playerOne.setPoints(15);
         playerTwo.setPoints(15);
-        playerTwo.winsPoint();
+        playerTwo.winsPoint(playerOne);
         String score = game.score();
         assertEquals("15:30", score);
     }
@@ -62,7 +62,7 @@ public class GameTest {
         Game game = new Game(playerOne, playerTwo);
         playerOne.setPoints(30);
         playerTwo.setPoints(30);
-        playerOne.winsPoint();
+        playerOne.winsPoint(playerTwo);
         String score = game.score();
         assertEquals("40:30", score);
     }
@@ -74,9 +74,31 @@ public class GameTest {
         Game game = new Game(playerOne, playerTwo);
         playerOne.setPoints(40);
         playerTwo.setPoints(40);
-        playerTwo.winsPoint();
+        playerTwo.winsPoint(playerOne);
         String score = game.score();
         assertEquals("40:A", score);
+    }
+
+    @Test
+    public void test_score_is_A_40_receiver_wins_point_40_40() {
+        Game game = new Game(playerOne, playerTwo);
+        playerOne.setPoints(40);
+        playerOne.setAdvantage("A");
+        playerTwo.setPoints(40);
+        playerTwo.winsPoint(playerOne);
+        String score = game.score();
+        assertEquals("40:40", score);
+    }
+
+    @Test
+    public void test_score_is_40_A_receiver_wins_point_40_40() {
+        Game game = new Game(playerOne, playerTwo);
+        playerOne.setPoints(40);
+        playerTwo.setPoints(40);
+        playerTwo.setAdvantage("A");
+        playerOne.winsPoint(playerTwo);
+        String score = game.score();
+        assertEquals("40:40", score);
     }
 
 }
