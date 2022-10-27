@@ -70,7 +70,7 @@ public class GameTest {
     // Deuce and Advantage are Scored Correctly
 
     @Test
-    public void test_state_40_40_receiver_wins_point_40_A() {
+    public void test_score_is_40_40_receiver_wins_point_40_A() {
         Game game = new Game(playerOne, playerTwo);
         playerOne.setPoints(40);
         playerTwo.setPoints(40);

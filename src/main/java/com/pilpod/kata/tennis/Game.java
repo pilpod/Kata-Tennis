@@ -21,21 +21,29 @@ public class Game {
 
     public String score() {
 
-        if (playerOne.getPoints() <= 40 && 
-            playerTwo.getPoints() <= 40) {
-            this.score = String.format("%d:%d", playerOne.getPoints(), playerTwo.getPoints());
-        }
+        Object scorePlayerOne = retrievePlayerOneScore();
+        Object scorePlayerTwo = retrievePlayerTwoScore();
+
+        this.score = String.format("%s:%s", scorePlayerOne, scorePlayerTwo);
+
+        return this.score;
+    }
+
+    public Object retrievePlayerOneScore() {
 
         if (playerOne.getAdvantage() == "A") {
-            this.score = String.format("%s:%s", playerOne.getAdvantage(), playerTwo.getPoints());
+            return playerOne.getAdvantage();
         }
-
-        if (playerTwo.getAdvantage() == "A") {
-            this.score = String.format("%s:%s", playerOne.getPoints(), playerTwo.getAdvantage());
-        }
-
         
-        return this.score;
+        return playerOne.getPoints();
+    }
+
+    public Object retrievePlayerTwoScore() {
+        if (playerTwo.getAdvantage() == "A") {
+            return playerTwo.getAdvantage();
+        }
+        
+        return playerTwo.getPoints();
     }
 
 }
