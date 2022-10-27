@@ -3,12 +3,13 @@ package com.pilpod.kata.tennis;
 public class Player {
     
     boolean service;
-    int points;
+    Integer points = 0;
+    String advantage;
 
     public Player() {
     }
 
-    public int getPoints() {
+    public Integer getPoints() {
         return points;
     }
 
@@ -24,11 +25,21 @@ public class Player {
         this.service = service;
     }
 
+    public String getAdvantage() {
+        return advantage;
+    }
+
     public void winsPoint() {
 
         int[] pointsList = {0,15,30,40};
 
         for (int i = 0; i < pointsList.length; i++) {
+
+            if (this.points == 40) {
+                this.advantage = "A";
+                break;
+            }
+
             if (this.points == pointsList[i]) {
                 i++;
                 this.points = pointsList[i];

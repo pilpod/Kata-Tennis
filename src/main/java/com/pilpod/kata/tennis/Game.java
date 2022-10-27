@@ -20,7 +20,21 @@ public class Game {
     }
 
     public String score() {
-        this.score = String.format("%d:%d", playerOne.getPoints(),playerTwo.getPoints());
+
+        if (playerOne.getPoints() <= 40 && 
+            playerTwo.getPoints() <= 40) {
+            this.score = String.format("%d:%d", playerOne.getPoints(), playerTwo.getPoints());
+        }
+
+        if (playerOne.getAdvantage() == "A") {
+            this.score = String.format("%s:%s", playerOne.getAdvantage(), playerTwo.getPoints());
+        }
+
+        if (playerTwo.getAdvantage() == "A") {
+            this.score = String.format("%s:%s", playerOne.getPoints(), playerTwo.getAdvantage());
+        }
+
+        
         return this.score;
     }
 
