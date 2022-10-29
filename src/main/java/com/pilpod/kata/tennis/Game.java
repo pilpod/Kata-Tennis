@@ -1,5 +1,7 @@
 package com.pilpod.kata.tennis;
 
+import java.util.ArrayList;
+
 public class Game {
 
     Player playerOne;
@@ -21,10 +23,16 @@ public class Game {
 
     public String score() {
 
-        if (playerOne.winSet || playerTwo.winSet) {
-            Player winner = playerWinsSet(playerOne);
-            this.score = String.format("%s wins", winner.getName());
-            return this.score;
+        ArrayList<Player> players = new ArrayList<>();
+        players.add(playerOne);
+        players.add(playerTwo);
+
+        for (Player player : players) {
+            if (player.winSet) {
+                Player winner = playerWinsSet(player);
+                this.score = String.format("%s wins", winner.getName());
+                return this.score;
+            }
         }
 
         Object scorePlayerOne = retrievePlayerOneScore();

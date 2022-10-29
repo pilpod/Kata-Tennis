@@ -115,4 +115,16 @@ public class GameTest {
         assertEquals("Nadal wins", score);
     }
 
+    @Test
+    public void test_score_40_A_receiver_wins_point_receiver_should_win() {
+        Game game = new Game(playerOne, playerTwo);
+        playerOne.setPoints(40);
+        playerTwo.setPoints(40);
+        playerTwo.setAdvantage("A");
+        playerTwo.winsPoint(playerOne);
+        String score = game.score();
+        assertTrue(playerTwo.winSet);
+        assertEquals("Federer wins", score);
+    }
+
 }

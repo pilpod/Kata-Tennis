@@ -56,9 +56,19 @@ public class Player {
                 break;
             }
 
+            if (this.advantage == "A") {
+                this.points = 0;
+                opponent.setPoints(0);
+                this.advantage = null;
+                this.winSet = true;
+                opponent.winSet = false;
+                break;
+            }
+
             if (this.points == 40 && opponent.points < 40) {
                 this.points = 0;
                 opponent.setPoints(0);
+                this.advantage = null;
                 this.winSet = true;
                 opponent.winSet = false;
                 break;
