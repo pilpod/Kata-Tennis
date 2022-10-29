@@ -37,6 +37,10 @@ public class Player {
         this.service = service;
     }
 
+    private void setWinSet(boolean winSet) {
+        this.winSet = winSet;
+    }
+
     public String getAdvantage() {
         return advantage;
     }
@@ -51,37 +55,33 @@ public class Player {
 
         for (int i = 0; i < pointsList.length; i++) {
 
-            if (opponent.advantage == "A") {
+            boolean opponentHasAdvantage = opponent.advantage == "A";
+            boolean playerWinsSet = (this.points == 40 && opponent.points < 40) || this.advantage == "A";
+            boolean playerHas40Points = this.points == 40;
+            boolean changeScorePoints = this.points == pointsList[i];
+
+            if (opponentHasAdvantage) {
                 opponent.loseAdvantage();
                 break;
             }
 
-            if (this.advantage == "A") {
-                this.points = 0;
+            if (playerWinsSet) {
+                setPoints(0);
                 opponent.setPoints(0);
-                this.advantage = null;
-                this.winSet = true;
-                opponent.winSet = false;
+                setAdvantage(null);
+                setWinSet(true);
+                opponent.setWinSet(false);
                 break;
             }
 
-            if (this.points == 40 && opponent.points < 40) {
-                this.points = 0;
-                opponent.setPoints(0);
-                this.advantage = null;
-                this.winSet = true;
-                opponent.winSet = false;
+            if (playerHas40Points) {
+                setAdvantage("A");
                 break;
             }
 
-            if (this.points == 40) {
-                this.advantage = "A";
-                break;
-            }
-
-            if (this.points == pointsList[i]) {
+            if (changeScorePoints) {
                 i++;
-                this.points = pointsList[i];
+                setPoints(pointsList[i]);
                 break;
             }
         }
