@@ -1,6 +1,7 @@
 package com.pilpod.kata.tennis;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,8 +13,8 @@ public class GameTest {
 
     @BeforeEach
     public void setUp() {
-        this.playerOne = new Player();
-        this.playerTwo = new Player();
+        this.playerOne = new Player("Nadal");
+        this.playerTwo = new Player("Federer");
     }
 
     @Test
@@ -99,6 +100,19 @@ public class GameTest {
         playerOne.winsPoint(playerTwo);
         String score = game.score();
         assertEquals("40:40", score);
+    }
+
+    // Winning Points are Scored Correctly
+
+    @Test
+    public void test_score_40_30_server_wins_point_server_should_win() {
+        Game game = new Game(playerOne, playerTwo);
+        playerOne.setPoints(40);
+        playerTwo.setPoints(30);
+        playerOne.winsPoint(playerTwo);
+        String score = game.score();
+        assertTrue(playerOne.winSet);
+        assertEquals("Nadal wins", score);
     }
 
 }

@@ -10,7 +10,7 @@ public class Game {
         this.playerOne = playerOne;
         this.playerTwo = playerTwo;
     }
-    
+
     public String getScore() {
         return score;
     }
@@ -21,11 +21,15 @@ public class Game {
 
     public String score() {
 
+        if (playerOne.winSet || playerTwo.winSet) {
+            Player winner = playerWinsSet(playerOne);
+            this.score = String.format("%s wins", winner.getName());
+            return this.score;
+        }
+
         Object scorePlayerOne = retrievePlayerOneScore();
         Object scorePlayerTwo = retrievePlayerTwoScore();
-
         this.score = String.format("%s:%s", scorePlayerOne, scorePlayerTwo);
-
         return this.score;
     }
 
@@ -34,7 +38,7 @@ public class Game {
         if (playerOne.getAdvantage() == "A") {
             return playerOne.getAdvantage();
         }
-        
+
         return playerOne.getPoints();
     }
 
@@ -42,8 +46,13 @@ public class Game {
         if (playerTwo.getAdvantage() == "A") {
             return playerTwo.getAdvantage();
         }
-        
+
         return playerTwo.getPoints();
     }
 
+    public Player playerWinsSet(Player player) {
+        if (player.winSet)
+            return player;
+        return null;
+    }
 }

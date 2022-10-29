@@ -3,10 +3,22 @@ package com.pilpod.kata.tennis;
 public class Player {
     
     boolean service;
+    boolean winSet;
     Integer points = 0;
     String advantage;
+    private String name;
 
     public Player() {
+        this.winSet = false;
+    }
+
+    public Player(String name) {
+        this.name = name;
+        this.winSet = false;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public Integer getPoints() {
@@ -41,6 +53,14 @@ public class Player {
 
             if (opponent.advantage == "A") {
                 opponent.loseAdvantage();
+                break;
+            }
+
+            if (this.points == 40 && opponent.points < 40) {
+                this.points = 0;
+                opponent.setPoints(0);
+                this.winSet = true;
+                opponent.winSet = false;
                 break;
             }
 
